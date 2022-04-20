@@ -1,5 +1,11 @@
 #docker run -v app.py:/app/app.py -P dstndstn/proxy-test
 
+#docker build -t dstndstn/proxy-test .
+#docker run -p 3000:3000 dstndstn/proxy-test
+
+# kill all docker containers:
+# docker kill $(docker ps -q)
+
 FROM ubuntu:20.04
 
 SHELL ["/bin/bash", "-c"]
@@ -15,7 +21,7 @@ RUN apt install -y build-essential python3 python3-distutils python3-dev curl wg
 RUN pip3 install flask uwsgi
 
 ENTRYPOINT ["/app/run.sh"]
+#CMD ["/app/run.sh"]
 EXPOSE 3000
 
 COPY run.sh myapp.py /app/
-#COPY app /app/app
